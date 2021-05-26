@@ -5,10 +5,16 @@ import { getMerchants, getTransactions, getUsers } from './utils/GraphQLData';
 const Content = styled.div`
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const BigNumber = styled.h2`
   color: red;
+`;
+
+const Button = styled.button`
+  width: 50px;
 `;
 
 // const Scroll = styled.div`
@@ -19,26 +25,26 @@ const BigNumber = styled.h2`
 
 const exchangeRate = 1.21;
 
+const getTransactionAmount = (amountInUSDCents, currency) => {
+  const dollars = currency === "USD" ? amountInUSDCents / 100 : (amountInUSDCents * exchangeRate) / 100;
+  return dollars.toLocaleString("en-US", {style:"currency", currency: currency});
+}
+
 const Summary = (props) => {
   return (
-    <BigNumber>{props.totalSpent}</BigNumber>
+    <BigNumber>{getTransactionAmount(props.totalSpent, props.currency)}</BigNumber>
   )
 }
 
 const Scroll = (props) => {
   return (
-      <div style={{overflowY: 'scroll', border: '1px solid black', height: '800px'}}>
+      <div style={{overflowY: 'scroll', border: '1px solid black', maxHeight: '800px', maxWidth:'800px'}}>
           {props.children}
       </div>
   )
 };
 
 const Transactions = (props) => {
-  const getTransactionAmount = (amountInUSDCents) => {
-    const dollars = props.currency === "USD" ? amountInUSDCents / 100 : (amountInUSDCents * exchangeRate) / 100;
-    return dollars.toLocaleString("en-US", {style:"currency", currency:props.currency});
-  }
-  
   return (
     <Scroll>
       <table>
@@ -65,7 +71,7 @@ const Transactions = (props) => {
             return (
               <tr key={transaction.id}>
                 <td>{transaction.id}</td>
-                <td>{getTransactionAmount(transaction.amountInUSDCents)}</td>
+                <td>{getTransactionAmount(transaction.amountInUSDCents, props.currency)}</td>
                 <td>{transaction.date.toLocaleDateString()}</td>
                 <td>{merchant?.name}</td>
                 <td>{transaction.cardId}</td>
@@ -113,7 +119,7 @@ function App() {
     <Content>
       <h1>Transactions</h1>
       <Summary totalSpent={totalSpent} currency={isUSD ? "USD" : "CAD"} />
-      <button onClick={switchCurrency}>{isUSD ? "CAD" : "USD"}</button>
+      <Button onClick={switchCurrency}>{isUSD ? "CAD" : "USD"}</Button>
       <Transactions transactions={transactions} merchants={merchants} users={users} currency={isUSD ? "USD" : "CAD"} />
     </Content>
   );
