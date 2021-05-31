@@ -34,7 +34,26 @@ const Button = styled.button`
 `;
 
 const Table = styled.table`
-  align-self: center;
+  width: 800px;
+  border: solid 1px #DDEEEE;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font: normal 13px Arial, sans-serif;
+  & > thead th {
+    background-color: #DDEFEF;
+    border: solid 1px #DDEEEE;
+    color: #336B6B;
+    padding: 10px;
+    text-align: left;
+    text-shadow: 1px 1px 1px #fff;
+  };
+  & > tbody td {
+    border: solid 1px #DDEEEE;
+    color: #333;
+    padding: 10px;
+    text-shadow: 1px 1px 1px #fff;
+  }
+
 `;
 
 const Card = styled.div`
@@ -66,7 +85,7 @@ const Summary = (props) => {
 
 const Scroll = (props) => {
   return (
-      <div style={{overflowY: 'scroll', border: '1px solid black', maxHeight: '800px', maxWidth:'810px'}}>
+      <div style={{overflowY: 'scroll', maxHeight: '800px', maxWidth:'810px'}}>
           {props.children}
       </div>
   )
@@ -75,8 +94,8 @@ const Scroll = (props) => {
 const Transactions = (props) => {
   return (
     <Scroll>
+      <h2>All transactions made by users</h2>
       <Table>
-        <caption>All transactions made by users</caption>
         <thead>
           <tr>
             <th>ID</th>
