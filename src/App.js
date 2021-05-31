@@ -7,38 +7,44 @@ const Content = styled.div`
   padding: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 
-const BigNumber = styled.p`
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const BigNumber = styled.span`
   font-size: 50px;
   margin: 0px 7px 0px 0px;
   display: inline-block;
+  color: #26ab45;
 `;
 
 const Button = styled.button`
-  width: 50px;
+  width: 100px;
+  height: 50px;
+  border-radius: 4px;
+  background-color: #26ab45;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 24px;
 `;
 
 const Table = styled.table`
-  
+  align-self: center;
 `;
 
 const Card = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
   padding: 5px;
   margin-bottom: 5px;
   border-radius: 5px;
   max-width: 800px;
 `;
-// const Scroll = styled.div`
-//   overflowY: 'scroll';
-//   border: '1px solid black';
-//   height: '800px';
-// `;
 
 const exchangeRate = 1.21;
 
@@ -60,7 +66,7 @@ const Summary = (props) => {
 
 const Scroll = (props) => {
   return (
-      <div style={{overflowY: 'scroll', border: '1px solid black', maxHeight: '800px', maxWidth:'800px'}}>
+      <div style={{overflowY: 'scroll', border: '1px solid black', maxHeight: '800px', maxWidth:'810px'}}>
           {props.children}
       </div>
   )
@@ -141,9 +147,11 @@ function App() {
 
   return (
     <Content>
-      <h1>Transactions</h1>
+      <Header>
+        <h1>Transactions</h1>
+        <Button onClick={switchCurrency}>{isUSD ? "CAD" : "USD"}</Button>
+      </Header>
       <Summary totalSpent={totalSpent} currency={isUSD ? "USD" : "CAD"} />
-      <Button onClick={switchCurrency}>{isUSD ? "CAD" : "USD"}</Button>
       <Transactions transactions={transactions} merchants={merchants} users={users} currency={isUSD ? "USD" : "CAD"} />
     </Content>
   );
