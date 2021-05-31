@@ -9,14 +9,31 @@ const Content = styled.div`
   flex-direction: column;
 `;
 
-const BigNumber = styled.h2`
-  color: red;
+const BigNumber = styled.p`
+  font-size: 50px;
+  margin: 0px 7px 0px 0px;
+  display: inline-block;
 `;
 
 const Button = styled.button`
   width: 50px;
 `;
 
+const Table = styled.table`
+  
+`;
+
+const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  max-width: 800px;
+`;
 // const Scroll = styled.div`
 //   overflowY: 'scroll';
 //   border: '1px solid black';
@@ -32,7 +49,12 @@ const getTransactionAmount = (amountInUSDCents, currency) => {
 
 const Summary = (props) => {
   return (
-    <BigNumber>{getTransactionAmount(props.totalSpent, props.currency)}</BigNumber>
+    <Card>
+        <p>
+          <BigNumber>{getTransactionAmount(props.totalSpent, props.currency)}</BigNumber>
+          total spent by users.
+        </p>
+    </Card>
   )
 }
 
@@ -47,9 +69,9 @@ const Scroll = (props) => {
 const Transactions = (props) => {
   return (
     <Scroll>
-      <table>
+      <Table>
         <caption>All transactions made by users</caption>
-        <tbody>
+        <thead>
           <tr>
             <th>ID</th>
             <th>Amount</th>
@@ -59,6 +81,8 @@ const Transactions = (props) => {
             <th>User First Name</th>
             <th>User Last Name</th>
           </tr>
+        </thead>
+        <tbody>
           {props.transactions.map((transaction) => {
             const merchant = props.merchants.find(merchant => {
               return merchant.networkId === transaction.merchantNetworkId;
@@ -81,7 +105,7 @@ const Transactions = (props) => {
             )
           })}
         </tbody>
-      </table>
+      </Table>
     </Scroll>
   )
 }
