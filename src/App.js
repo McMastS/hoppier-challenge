@@ -11,6 +11,7 @@ const Content = styled.div`
 `;
 
 const Header = styled.div`
+  width: 810px;
   display: flex;
   justify-content: space-between;
 `;
@@ -47,7 +48,7 @@ const Table = styled.table`
     text-align: left;
     text-shadow: 1px 1px 1px #fff;
   };
-  
+
   & > tbody td {
     border: solid 1px #DDEEEE;
     color: #333;
