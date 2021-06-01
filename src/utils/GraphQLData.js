@@ -1,6 +1,6 @@
 import faker from 'faker';
 
-const seed = 20201222;
+const seed = 20201221;
 
 // Change this to get the test a new set of data
 faker.seed(seed);

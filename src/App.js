@@ -47,13 +47,13 @@ const Table = styled.table`
     text-align: left;
     text-shadow: 1px 1px 1px #fff;
   };
+  
   & > tbody td {
     border: solid 1px #DDEEEE;
     color: #333;
     padding: 10px;
     text-shadow: 1px 1px 1px #fff;
   }
-
 `;
 
 const Card = styled.div`
@@ -136,7 +136,6 @@ const Transactions = (props) => {
 }
 
 function App() {
-  // const [isLoading, setIsLoading] = useState('');
   const [transactions, setTransactions] = useState([]);
   const [users, setUsers] = useState([]);
   const [merchants, setMerchants] = useState([]);
